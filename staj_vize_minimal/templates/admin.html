@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Paneli</title>
+</head>
+<body>
+    <h2>Admin Paneli - Vize (<a href="/cikis">Çıkış Yap</a>)</h2>
+
+    {% for m in get_flashed_messages() %}
+        <p style="color: green;"><b>{{ m }}</b></p>
+    {% endfor %}
+
+    <h3>Test Veri Seti Yükle (CSV)</h3>
+    <form method="POST" enctype="multipart/form-data">
+        CSV Dosyası: <input type="file" name="csv_dosya" accept=".csv" required>
+        <button type="submit">İçe Aktar</button>
+    </form>
+
+    <hr>
+    <h3>Sistemdeki Öğrenciler</h3>
+    {% for o in ogrenciler %}
+        <p>{{ o['ogrenci_no'] }} - {{ o['ad_soyad'] }} ({{ o['bolum'] }})</p>
+    {% endfor %}
+
+    <hr>
+    <h3>Yüklenen Başvurular</h3>
+    {% for b in basvurular %}
+        <p>#{{ b['id'] }} - {{ b['ad_soyad'] }} | <b>{{ b['statu'] }}</b> ({{ b['tarih'] }})</p>
+    {% endfor %}
+</body>
+</html>

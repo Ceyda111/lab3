@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Staj Evrak Sistemi - Giriş</title>
+</head>
+<body>
+    <h2>Staj Evrak Sistemi - Vize</h2>
+
+    {% for m in get_flashed_messages() %}
+        <p style="color: red;">{{ m }}</p>
+    {% endfor %}
+
+    <form method="POST">
+        <label>E-posta:</label>
+        <input type="text" name="eposta" required><br><br>
+
+        <label>Şifre:</label>
+        <input type="password" name="sifre" required><br><br>
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    <hr>
+    <p><small>
+        Örnek Öğrenci: ogrenci@kou.edu.tr / 123456<br>
+        Örnek Admin: admin@kou.edu.tr / admin123
+    </small></p>
+</body>
+</html>
