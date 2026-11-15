@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Öğrenci Paneli</title>
+</head>
+<body>
+    <h2>Öğrenci Paneli ({{ ogr['ad_soyad'] }}) - <a href="/cikis">Çıkış Yap</a></h2>
+
+    {% for m in get_flashed_messages() %}
+        <p style="color: blue;"><b>{{ m }}</b></p>
+    {% endfor %}
+
+    <h3>Ek-16 Belgesi Yükle ve Kontrol Et</h3>
+    <form method="POST" enctype="multipart/form-data">
+        Ek-16 Dosyası (.doc, .docx, .pdf, .jpeg, .png):
+        <input type="file" name="evrak" required><br><br>
+
+        Ad Soyad: <input type="text" name="ad_soyad" value="{{ ogr['ad_soyad'] }}" required>
+        Uyruk:
+        <select name="uyruk">
+            <option value="TC">TC</option>
+            <option value="YABANCI">YABANCI</option>
+        </select>
+        Kimlik No: <input type="text" name="kimlik_no" value="{{ ogr['tc_no'] }}" required><br><br>
+
+        Adres (Mahalle, Cadde, Bina, Daire, İlçe/İl):
+        <input type="text" name="adres" size="55" value="{{ ogr['adres'] }}" required><br><br>
+
+        Telefon (+90 xxx xxx xx xx): <input type="text" name="telefon" value="{{ ogr['telefon'] }}" required>
+        E-posta: <input type="text" name="eposta" value="{{ ogr['eposta'] }}" required><br><br>
+
+        Öğretim Yılı: <input type="text" name="ogretim_yili" value="2025-2026 Bahar" required>
+        Başlangıç Tarihi: <input type="date" name="baslangic" required>
+        Bitiş Tarihi: <input type="date" name="bitis" required><br><br>
+
+        Staj Günleri:
+        {% for g in ['Pzt', 'Sal', 'Car', 'Per', 'Cum', 'Cmt'] %}
+            <label><input type="checkbox" name="gunler" value="{{ g }}">{{ g }}</label>
+        {% endfor %}<br><br>
+
+        Belgedeki Gün Sayısı: <input type="number" name="belge_gun" value="20" required>
+        Mühendis Sayısı: <input type="number" name="muhendis" value="3" required>
+        Mühendis Bölümü (5'ten azsa): <input type="text" name="muh_bolum"><br><br>
+
+        <label><input type="checkbox" name="isveren_onay" checked> İşveren Kaşe + İmza Dolu</label>
+        <label><input type="checkbox" name="ogr_onay"> Öğrenci Onay Dolu</label>
+        <label><input type="checkbox" name="danisman_onay"> Danışman Onay Dolu</label><br><br>
+
+        <button type="submit">Yükle ve Kontrol Et</button>
+    </form>
+
+    <hr>
+    <h3>Başvurularım</h3>
+    {% for b in basvurular %}
+        <p>
+            <b>#{{ b['id'] }}</b> - Statü: <b>{{ b['statu'] }}</b> | Hesaplanan Gün: {{ b['gun_sayisi'] }}<br>
+            Sonuç: {{ b['sonuc_notu'] }}
+        </p>
+    {% endfor %}
+</body>
+</html>

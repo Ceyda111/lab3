@@ -1,0 +1,5 @@
+*.db
+yuklenen_dosyalar/
+__pycache__/
+venv/
+.venv/
